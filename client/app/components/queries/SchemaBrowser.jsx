@@ -158,7 +158,10 @@ export function SchemaList({ loading, schema, expandedFlags, onTableExpand, onIt
       listRef.recomputeRowHeights();
     }
   }, [listRef, schema, expandedFlags]);
-
+  // code: 2
+  // columns: []
+  // details: "Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information."
+  // message: "Error retrieving schema"
   return (
     <div className="schema-browser">
       {loading && <SchemaLoadingState />}
@@ -178,6 +181,7 @@ export function SchemaList({ loading, schema, expandedFlags, onTableExpand, onIt
               }}
               rowRenderer={({ key, index, style }) => {
                 const item = schema[index];
+                if (!item.name) return null;
                 return (
                   <SchemaItem
                     key={key}
